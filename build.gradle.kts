@@ -1,3 +1,7 @@
+import org.gradle.kotlin.dsl.invoke
+import io.gitlab.arturbosch.detekt.Detekt
+import io.gitlab.arturbosch.detekt.report.ReportMergeTask
+
 plugins {
     // this is necessary to avoid the plugins to be loaded multiple times
     // in each subproject's classloader
@@ -7,8 +11,11 @@ plugins {
     alias(libs.plugins.composeMultiplatform) apply false
     alias(libs.plugins.composeCompiler) apply false
     alias(libs.plugins.kotlinMultiplatform) apply false
+    alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlinSerialization) apply false
     alias(libs.plugins.sentry) apply false
+    alias(libs.plugins.kotlin.detekt) apply true
+    alias(libs.plugins.moko.resources) apply false
     alias(libs.plugins.axionRelease)
 }
 
@@ -38,8 +45,36 @@ val gitVersionCode: Int = 29300724 + providers.exec {
     commandLine("git", "rev-list", "--count", "HEAD")
 }.standardOutput.asText.get().trim().toInt()
 
+val detektReportMergeSarif by tasks.registering(ReportMergeTask::class) {
+    output = layout.buildDirectory.file("reports/detekt/merge.sarif")
+}
 
 allprojects {
     version = rootProject.version
     extra["versionCode"] = gitVersionCode
+
+    apply(plugin = rootProject.libs.plugins.kotlin.detekt.get().pluginId)
+
+    detekt {
+        config.from(rootDir.resolve("detekt.yml"))
+        buildUponDefaultConfig = true
+        basePath = rootDir.path
+        // Autocorrection can only be done locally
+        autoCorrect = System.getenv("CI")?.lowercase() != true.toString()
+    }
+
+    dependencies {
+        detektPlugins(rootProject.libs.detekt.formatting)
+    }
+
+    tasks.withType<Detekt>().configureEach {
+        reports {
+            html.required = true
+            sarif.required = true
+        }
+        finalizedBy(detektReportMergeSarif)
+    }
+    detektReportMergeSarif {
+        input.from(tasks.withType<Detekt>().map { it.sarifReportFile })
+    }
 }
