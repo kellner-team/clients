@@ -148,12 +148,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 60349513182458A51949DF23 /* Build configuration list for PBXNativeTarget "WaiterRobotLava" */;
 			buildPhases = (
-				3373788ECCEFE183F0C29B83 /* Set BuildNumber to epochMinute */,
 				82416FF42D64F90000B4FCCE /* Build shared Kotlin framework */,
 				ADBAC7ADCDC436C4DA348DF2 /* Sources */,
 				40C1E9D09B43297FF0E234CC /* Resources */,
 				EE8E9FC485BFB11435986301 /* Frameworks */,
 				82416FF22D64F90000B4FCCE /* Copy moko-resources bundle to app */,
+				3373788ECCEFE183F0C29B83 /* Set version from git */,
 			);
 			buildRules = (
 			);
@@ -182,6 +182,7 @@
 				35A540AA506C44AA0778E09E /* Resources */,
 				849BE04D5C6F481ED261FC99 /* Frameworks */,
 				82416FF12D64F90000B4FCCE /* Copy moko-resources bundle to app */,
+				3373788ECCEFE183F0C29B84 /* Set version from git */,
 			);
 			buildRules = (
 			);
@@ -258,7 +259,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3373788ECCEFE183F0C29B83 /* Set BuildNumber to epochMinute */ = {
+		3373788ECCEFE183F0C29B83 /* Set version from git */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -268,14 +269,33 @@
 			);
 			inputPaths = (
 			);
-			name = "Set BuildNumber to epochMinute";
+			name = "Set version from git";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Lava uses the epochMinute as buildNumber\n/usr/libexec/PlistBuddy -c \"Set CFBundleVersion $(($(date +\"%s\")/60))\" \"Targets/Lava/WaiterRobotLava.plist\"\n";
+			shellScript = "\"$SRCROOT/scripts/set-version.sh\"\n";
+		};
+		3373788ECCEFE183F0C29B84 /* Set version from git */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Set version from git";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$SRCROOT/scripts/set-version.sh\"\n";
 		};
 		82416FF12D64F90000B4FCCE /* Copy moko-resources bundle to app */ = {
 			isa = PBXShellScriptBuildPhase;

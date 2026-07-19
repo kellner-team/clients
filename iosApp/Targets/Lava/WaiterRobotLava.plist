@@ -24,9 +24,9 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.5.0</string>
+	<string>0.0.0</string>
 	<key>CFBundleVersion</key>
-	<string>29178434</string>
+	<string>0</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>NSAppTransportSecurity</key>
@@ -72,6 +72,6 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>VERSION_SUFFIX</key>
-	<string>lava</string>
+	<string>placeholder</string>
 </dict>
 </plist>

@@ -3,7 +3,6 @@ import com.android.build.gradle.internal.dsl.NdkOptions.DebugSymbolLevel
 import com.github.triplet.gradle.androidpublisher.ReleaseStatus
 import org.gradle.internal.extensions.core.extra
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
-import java.util.Date
 import java.util.Locale
 import java.util.Properties
 
@@ -106,17 +105,8 @@ android {
         create("lava") {
             dimension = "environment"
             applicationIdSuffix = ".lava"
-            allowedHosts("*")
             manifestPlaceholders["host"] = "lava.kellner.team"
-
-            // Use time-based versionCode for lava to allow multiple build per "base version"
-            // versionCode is limited to "2100000000" by google play.
-            // If using epochSeconds this would overflow in 2036.
-            // -> use epochMinutes (overflow would be in 5962).
-            // (conversion to int is save as java int is bigger as the max versionCode allowed by google play)
-            val epochMinutes = (Date().toInstant().epochSecond / 60).toInt()
-            versionNameSuffix = "-lava-$epochMinutes"
-            versionCode = epochMinutes
+            allowedHosts("*")
         }
 
         create("prod") {

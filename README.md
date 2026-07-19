@@ -53,7 +53,7 @@ Every client is versioned from git tags via axion-release. Tags are plain semver
     - Release build (working tree sits exactly on a clean tag): `major.minor.patch` (e.g. `3.1.1`)
     - Lava (staging/dev) build, i.e. any build not on a release tag: `major.minor.patch-lava-commitHash`
       (e.g. `3.1.2-lava-a1b2c3d`) — the short commit hash makes the build traceable to an exact commit (e.g. in Sentry).
-- **`versionCode`** (the monotonic integer required by Google Play and the App Store): a fixed baseline plus the total
+- **`versionCode`** (the monotonic integer required by Google Play): a fixed baseline plus the total
   commit count (`git rev-list --count HEAD`). The baseline (in the root `build.gradle.kts`) lifts every generated code
   above the highest `versionCode` that was already published before versioning moved to git; the commit count keeps it
   strictly increasing on `main` from there.
@@ -68,6 +68,23 @@ published, or a re-publish without a source change). When that happens, bump the
 ```shell
 git commit --allow-empty -m "rebump versionCode"
 ```
+
+### iOS
+
+iOS uses the very same axion-release version: the [set-version.sh](./iosApp/scripts/set-version.sh) build phase asks
+Gradle (`./gradlew currentVersion`) and patches the *built* `Info.plist`, so nothing is hardcoded in the repo and the
+working tree stays clean (the values in `Targets/*/…plist` are placeholders and are never used).
+
+Two things differ from Android:
+
+- Apple only accepts numbers in `CFBundleShortVersionString`, so the lava suffix cannot live there. It goes into the
+  `VERSION_SUFFIX` key instead, and `Globals.swift` re-joins the two into the same version name Android reports
+  (e.g. `3.1.2-lava-a1b2c3d`).
+- `CFBundleVersion` is **not** the commit count. It uses Xcode Cloud's auto incrementing build number
+  (`$CI_BUILD_NUMBER`), which sidesteps the duplicate-upload problem described above. Local builds get `1`.
+
+Xcode Cloud clones shallow and without tags, so [ci_post_clone.sh](./iosApp/ci_scripts/ci_post_clone.sh) restores the
+full history before the build.
 
 ## Build and Run
 

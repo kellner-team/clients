@@ -21,7 +21,7 @@ class WaiterRobotApp : Application() {
         // Init CommonApp right at the start as e.g. koin might depend on some properties of it
         CommonApp.init(
             os = OS.Android(Build.VERSION.RELEASE),
-            appVersion = BuildConfig.VERSION_NAME.substringBeforeLast("-"), // Remove appBuild from version
+            appVersion = BuildConfig.VERSION_NAME,
             appBuild = BuildConfig.VERSION_CODE,
             phoneModel = phoneModel,
             allowedHostsCsv = BuildConfig.ALLOWED_HOSTS_CSV,
