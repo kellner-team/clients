@@ -41,7 +41,6 @@ On each push to the main branch a lava (staging/dev) build is triggered.
 - android will be published to the `internal` track of the `lava kellner.team` app
   on [Google Play](https://play.google.com/store/apps/details?id=org.datepollsystems.waiterrobot.android.lava).
 - iOS will be published to TestFlight of the kellner.team Lava app.
-- TODO add desktop (if staging is easily possible there?)
 
 For access to the development builds of Android and iOS contact `development@kellner.team`.
 
@@ -87,20 +86,6 @@ in your IDE’s toolbar or build it directly from the terminal:
   ```
 
 To also install and launch it in a running emulator use the `:composeApp:installDebug` task.
-
-### Desktop (JVM) Application
-
-To build and run the development version of the desktop app, use the run configuration from the run widget
-in your IDE’s toolbar or run it directly from the terminal:
-
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:run
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:run
-  ```
 
 ### iOS Application
 
