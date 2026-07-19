@@ -3,7 +3,6 @@ import com.android.build.gradle.internal.dsl.NdkOptions.DebugSymbolLevel
 import com.github.triplet.gradle.androidpublisher.ReleaseStatus
 import org.gradle.internal.extensions.core.extra
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
-import java.util.Locale
 import java.util.Properties
 
 plugins {
@@ -117,7 +116,7 @@ android {
         }
     }
 
-    applicationVariants.all variant@{
+    applicationVariants.all {
         // Include the generated navigation sources
         kotlin.sourceSets {
             getByName(name) {
@@ -127,20 +126,6 @@ android {
                         "/generated/ksp/$name/kotlin"
                     )
                 )
-            }
-        }
-
-        // Write built version to file after creating a bundle (needed for ci, to create the version tag)
-        if (this.name.endsWith("Release")) {
-            tasks.findByName(
-                "publish${
-                    this.name.replaceFirstChar {
-                        if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
-                    }
-                }Bundle"
-            )!!.doLast {
-                File(project.layout.buildDirectory.asFile.get(), "version.tag")
-                    .writeText(this@variant.versionName)
             }
         }
     }
