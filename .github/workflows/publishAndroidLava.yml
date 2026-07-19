@@ -18,11 +18,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v7
 
-      - name: set up JDK 17
+      - name: Setup JDK
         uses: actions/setup-java@v5
         with:
-          java-version: '17'
-          distribution: 'adopt'
+          java-version-file: .java-version
+          distribution: 'temurin'
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6

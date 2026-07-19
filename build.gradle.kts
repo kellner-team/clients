@@ -45,6 +45,13 @@ val gitVersionCode: Int = 29300724 + providers.exec {
     commandLine("git", "rev-list", "--count", "HEAD")
 }.standardOutput.asText.get().trim().toInt()
 
+// Single source of truth for the JDK the project is built with. Also read by the
+// GitHub workflows (setup-java `java-version-file`), iosApp/ci_scripts/ci_post_clone.sh
+// and local toolchain managers (asdf/sdkman/IntelliJ).
+// NOTE: this is the *toolchain* (which JDK compiles), not the bytecode level the
+// artifacts target -- see `jvmTarget` in shared/build.gradle.kts for the latter.
+val javaToolchainVersion: Int = rootDir.resolve(".java-version").readText().trim().toInt()
+
 val detektReportMergeSarif by tasks.registering(ReportMergeTask::class) {
     output = layout.buildDirectory.file("reports/detekt/merge.sarif")
 }
@@ -52,6 +59,7 @@ val detektReportMergeSarif by tasks.registering(ReportMergeTask::class) {
 allprojects {
     version = rootProject.version
     extra["versionCode"] = gitVersionCode
+    extra["javaVersion"] = javaToolchainVersion
 
     apply(plugin = rootProject.libs.plugins.kotlin.detekt.get().pluginId)
 

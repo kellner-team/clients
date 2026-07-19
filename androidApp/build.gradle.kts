@@ -28,7 +28,8 @@ fun fromProjectOrLocalProperties(name: String): Any? = run {
 group = "org.datepollsystems.waiterrobot"
 
 kotlin {
-    jvmToolchain(17)
+    // Defined in the root .java-version, see root build.gradle.kts.
+    jvmToolchain(rootProject.extra["javaVersion"] as Int)
 }
 
 android {
