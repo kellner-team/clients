@@ -10,9 +10,9 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-suspend fun Reader.connect(config: ConnectionConfiguration.LocalMobileConnectionConfiguration): Reader =
+suspend fun Reader.connect(config: ConnectionConfiguration.TapToPayConnectionConfiguration): Reader =
     suspendCoroutine {
-        Terminal.getInstance().connectLocalMobileReader(this, config, SuspendingConnect(it))
+        Terminal.getInstance().connectReader(this, config, SuspendingConnect(it))
     }
 
 private class SuspendingConnect(

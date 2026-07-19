@@ -4,14 +4,17 @@ import android.content.Context
 import android.location.LocationManager
 import android.nfc.NfcAdapter
 import com.stripe.stripeterminal.Terminal
+import com.stripe.stripeterminal.external.callable.ConnectionTokenProvider
 import com.stripe.stripeterminal.external.callable.TerminalListener
-import com.stripe.stripeterminal.external.models.CollectConfiguration
+import com.stripe.stripeterminal.external.models.CollectPaymentIntentConfiguration
 import com.stripe.stripeterminal.external.models.ConnectionConfiguration
 import com.stripe.stripeterminal.external.models.ConnectionStatus
 import com.stripe.stripeterminal.external.models.DiscoveryConfiguration
+import com.stripe.stripeterminal.external.models.LocaleConfig
 import com.stripe.stripeterminal.external.models.PaymentIntentStatus
 import com.stripe.stripeterminal.external.models.PaymentStatus
-import com.stripe.stripeterminal.external.models.Reader
+import com.stripe.stripeterminal.external.models.TapUseCase
+import com.stripe.stripeterminal.external.models.TerminalErrorCode
 import com.stripe.stripeterminal.external.models.TerminalException
 import com.stripe.stripeterminal.log.LogLevel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -42,7 +45,7 @@ object Stripe : KoinComponent, TerminalListener, StripeProvider {
     override suspend fun collectPayment(intent: PaymentIntent): Boolean = try {
         val paymentIntent = Terminal.retrievePaymentIntent(intent.clientSecret)
 
-        val collectConfig = CollectConfiguration.Builder()
+        val collectConfig = CollectPaymentIntentConfiguration.Builder()
             .skipTipping(false) // TODO add setting for this?
             .build()
 
@@ -51,13 +54,13 @@ object Stripe : KoinComponent, TerminalListener, StripeProvider {
         collectedIntent.confirm().status == PaymentIntentStatus.SUCCEEDED
     } catch (e: TerminalException) {
         throw when (e.errorCode) {
-            TerminalException.TerminalErrorCode.CANCELED ->
+            TerminalErrorCode.CANCELED ->
                 PaymentCanceledException(e, e.errorCode.toLogString())
 
-            TerminalException.TerminalErrorCode.LOCATION_SERVICES_DISABLED ->
+            TerminalErrorCode.LOCATION_SERVICES_DISABLED ->
                 GeoLocationDisabledException(e, e.errorCode.toLogString())
 
-            TerminalException.TerminalErrorCode.LOCAL_MOBILE_NFC_DISABLED ->
+            TerminalErrorCode.TAP_TO_PAY_NFC_DISABLED ->
                 NfcDisabledException(e, e.errorCode.toLogString())
 
             else -> e.toStripeException("Failed to initiate payment")
@@ -82,11 +85,13 @@ object Stripe : KoinComponent, TerminalListener, StripeProvider {
     override fun isInitialized(): Boolean = Terminal.isInitialized()
 
     override fun initialize(): Unit = try {
-        Terminal.initTerminal(
+        Terminal.init(
             context = context,
             logLevel = LogLevel.VERBOSE,
-            tokenProvider = get(),
-            listener = this
+            tokenProvider = get<ConnectionTokenProvider>(),
+            listener = this,
+            offlineListener = null,
+            localeConfig = LocaleConfig.CardLanguagePreferenceIfAvailable
         )
     } catch (e: TerminalException) {
         e.toStripeException("Failed to initialize terminal")
@@ -97,7 +102,7 @@ object Stripe : KoinComponent, TerminalListener, StripeProvider {
     override suspend fun connectLocalReader(locationId: String) {
         // In debug mode only simulated readers can be used
         // And it seems like test locations can also only be used with simulated readers
-        val discoverConfig = DiscoveryConfiguration.LocalMobileDiscoveryConfiguration(
+        val discoverConfig = DiscoveryConfiguration.TapToPayDiscoveryConfiguration(
             isSimulated = BuildConfig.DEBUG ||
                 CommonApp.appInfo.appVersion.contains("lava", ignoreCase = true)
         )
@@ -109,8 +114,8 @@ object Stripe : KoinComponent, TerminalListener, StripeProvider {
             e.toStripeException("Reader discovery failed")
         }
 
-        val connectConfig = ConnectionConfiguration.LocalMobileConnectionConfiguration(
-            locationId,
+        val connectConfig = ConnectionConfiguration.TapToPayConnectionConfiguration(
+            useCase = TapUseCase.Pay(locationId),
             autoReconnectOnUnexpectedDisconnect = true
         )
 
@@ -122,10 +127,6 @@ object Stripe : KoinComponent, TerminalListener, StripeProvider {
 
         _connectedToReader.emit(true)
         logger.i("Connected to reader ${reader.id}")
-    }
-
-    override fun onUnexpectedReaderDisconnect(reader: Reader) {
-        logger.w("Reader disconnected")
     }
 
     override fun onConnectionStatusChange(status: ConnectionStatus) {

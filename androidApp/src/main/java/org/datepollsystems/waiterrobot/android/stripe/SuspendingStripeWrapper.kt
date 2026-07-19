@@ -2,7 +2,7 @@ package org.datepollsystems.waiterrobot.android.stripe
 
 import com.stripe.stripeterminal.Terminal
 import com.stripe.stripeterminal.external.callable.Callback
-import com.stripe.stripeterminal.external.models.CollectConfiguration
+import com.stripe.stripeterminal.external.models.CollectPaymentIntentConfiguration
 import com.stripe.stripeterminal.external.models.PaymentIntent
 import com.stripe.stripeterminal.external.models.TerminalException
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -15,15 +15,17 @@ suspend fun Terminal.Companion.retrievePaymentIntent(clientSecret: String) = sus
 }
 
 suspend fun PaymentIntent.collectPaymentMethod(
-    config: CollectConfiguration = CollectConfiguration.Builder().build()
+    config: CollectPaymentIntentConfiguration = CollectPaymentIntentConfiguration.Builder().build()
 ) = suspendCancellableCoroutine {
     val cancelable = Terminal.getInstance()
         .collectPaymentMethod(this, SuspendingPaymentIntentCallback(it), config)
     it.invokeOnCancellation { cancelable.cancel(NoopCallback("Cancel collectPayment")) }
 }
 
-suspend fun PaymentIntent.confirm() = suspendCoroutine {
-    Terminal.getInstance().confirmPaymentIntent(this, SuspendingPaymentIntentCallback(it))
+suspend fun PaymentIntent.confirm() = suspendCancellableCoroutine {
+    val cancelable = Terminal.getInstance()
+        .confirmPaymentIntent(this, SuspendingPaymentIntentCallback(it))
+    it.invokeOnCancellation { cancelable.cancel(NoopCallback("Cancel confirmPayment")) }
 }
 
 suspend fun PaymentIntent.cancel() = suspendCoroutine {

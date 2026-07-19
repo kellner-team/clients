@@ -45,7 +45,7 @@ accompanistPermissions = "0.34.0"
 koinCompose = "3.5.6"
 appUpdate = "2.1.0"
 barcodeScanning = "17.3.0"
-stripe = "3.10.2"
+stripe = "5.7.0"
 playServicesLocation = "21.3.0"
 
 [libraries]
@@ -84,7 +84,7 @@ compose-destinations = { module = "io.github.raamcosta.compose-destinations:core
 compose-destinations-ksp = { module = "io.github.raamcosta.compose-destinations:ksp", version.ref = "compose-destinations" }
 
 stripe-terminal = { module = "com.stripe:stripeterminal-core", version.ref = "stripe" }
-stripe-ttp = { module = "com.stripe:stripeterminal-localmobile", version.ref = "stripe" }
+stripe-ttp = { module = "com.stripe:stripeterminal-taptopay", version.ref = "stripe" }
 
 koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinCompose" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
