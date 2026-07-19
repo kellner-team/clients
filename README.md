@@ -1,16 +1,12 @@
 <p align="center">
-    <img alt="kellner.team logo" src="readmeRes/logo-square-rounded.png" style="width:200px; border-radius: 15px;"/><br>    
+    <img alt="kellner.team logo" src="readmeRes/logo-square-rounded.png" width="200px"/><br>    
 </p>
 <h1 align="center">kellner.team</h1>
 <div align="center">
     <span>Lightning fast and simple gastronomy</span><br>
-    <a href="https://play.google.com/store/apps/details?id=org.datepollsystems.waiterrobot.android">
-        <img alt="Get it on Google Play" height="60px" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"/>
-    </a>
-    <a href="https://apps.apple.com/at/app/waiterrobot/id1610157234?itsct=apps_box_badge&itscg=30200">
-      <img alt="Download on the App Store" height="40px" src="https://toolbox.marketingtools.apple.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&releaseDate=1660003200" style="margin-bottom: 10px;">
-    </a>
-    <!-- Add Desktop download image -->
+    <a href="https://play.google.com/store/apps/details?id=org.datepollsystems.waiterrobot.android"><img alt="Get it on Google Play" height="60px" align="middle" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"/></a>
+    <a href="https://apps.apple.com/at/app/waiterrobot/id1610157234?itsct=apps_box_badge&itscg=30200"><img alt="Download on the App Store" height="40px" align="middle" src="https://toolbox.marketingtools.apple.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&releaseDate=1660003200"></a>
+    <!-- TODO Add Desktop download image -->
 </div>
 
 ## Releasing
