@@ -16,7 +16,9 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v7
         with:
-          fetch-depth: 0 # axion-release needs the full history to derive versionName and versionCode
+          # axion-release needs the full history (incl. tags) to derive versionName and versionCode
+          fetch-depth: 0
+          fetch-tags: true
 
       - name: Setup JDK
         uses: actions/setup-java@v5
