@@ -1,7 +1,6 @@
 import shared
 import SwiftUI
 import UIPilot
-import WRCore
 
 struct OrderScreen: View {
     @EnvironmentObject var navigator: UIPilot<Screen>

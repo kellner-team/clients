@@ -1,6 +1,5 @@
 import shared
 import SwiftUI
-import WRCore
 
 struct Event: View {
     let event: shared.Event

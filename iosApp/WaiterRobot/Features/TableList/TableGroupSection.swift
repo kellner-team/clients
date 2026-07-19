@@ -1,7 +1,6 @@
 import shared
 import SharedUI
 import SwiftUI
-import WRCore
 
 struct TableGroupSection: View {
     @Environment(\.self)

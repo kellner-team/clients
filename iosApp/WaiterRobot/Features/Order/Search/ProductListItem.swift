@@ -1,6 +1,5 @@
 import shared
 import SwiftUI
-import WRCore
 
 struct ProductListItem: View {
     @Environment(\.self) var env

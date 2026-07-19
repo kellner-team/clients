@@ -1,7 +1,6 @@
 import shared
 import SwiftUI
 import UIPilot
-import WRCore
 
 struct TableGroupFilterSheet: View {
     @Environment(\.dismiss) private var dismiss

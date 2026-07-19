@@ -3,7 +3,6 @@ import shared
 import SharedUI
 import SwiftUI
 import UIPilot
-import WRCore
 
 struct LoginScreen: View {
     @EnvironmentObject var navigator: UIPilot<Screen>

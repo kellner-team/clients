@@ -2,7 +2,6 @@ import Foundation
 import shared
 import SharedUI
 import SwiftUI
-import WRCore
 
 struct LaunchScreen: View {
     @Environment(\.isPreview) private var isPreview

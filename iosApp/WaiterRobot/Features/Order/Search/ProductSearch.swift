@@ -1,6 +1,5 @@
 import shared
 import SwiftUI
-import WRCore
 
 struct ProductSearch: View {
     let addItem: (_ product: Product, _ amount: Int32) -> Void

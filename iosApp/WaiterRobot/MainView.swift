@@ -8,7 +8,6 @@
 import shared
 import SwiftUI
 import UIPilot
-import WRCore
 
 struct MainView: View {
     @State

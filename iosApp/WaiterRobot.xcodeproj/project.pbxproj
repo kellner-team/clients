@@ -14,8 +14,6 @@
 		73FF2191C23572A5DFF9E957 /* UIPilot in Frameworks */ = {isa = PBXBuildFile; productRef = C109840ED6C429035266718E /* UIPilot */; };
 		7936C5E94AE48188F2ADFA8A /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 37CBF231C369CD35ECC4385E /* CodeScanner */; };
 		7D707FDB5B95C572C974EC5E /* Sentry-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 43EED5F7BB605AA2D75C1887 /* Sentry-Dynamic */; };
-		C1135F54B24A6B86BDC6F769 /* WRCore in Frameworks */ = {isa = PBXBuildFile; productRef = B7E489280D66E5F0DD389817 /* WRCore */; };
-		DC97745CEB90B555448FA95F /* WRCore in Frameworks */ = {isa = PBXBuildFile; productRef = 169FFF39D770347AD66BA7D7 /* WRCore */; };
 		E8FE7DAD449CC3CE8386FA59 /* UIPilot in Frameworks */ = {isa = PBXBuildFile; productRef = 31066418D1485DF4475A6079 /* UIPilot */; };
 /* End PBXBuildFile section */
 
@@ -37,7 +35,6 @@
 		A952F4BB224D5237592F4D35 /* Package.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; path = Package.resolved; sourceTree = "<group>"; };
 		AF07F3A2F61F5C483A0AFE65 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		C499D63CB90F1FFC844F330E /* lava.kellner.team.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lava.kellner.team.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CA5239AA380E7A56C54E19AC /* WRCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = WRCore; path = Modules/WRCore; sourceTree = SOURCE_ROOT; };
 		F87396495BC0BE8285940A2F /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,7 +71,6 @@
 				E8FE7DAD449CC3CE8386FA59 /* UIPilot in Frameworks */,
 				7936C5E94AE48188F2ADFA8A /* CodeScanner in Frameworks */,
 				604A97194CDC4C491AB8FC8B /* SharedUI in Frameworks */,
-				DC97745CEB90B555448FA95F /* WRCore in Frameworks */,
 				2518F8E494B3AF68133FE7A8 /* Sentry-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,7 +82,6 @@
 				73FF2191C23572A5DFF9E957 /* UIPilot in Frameworks */,
 				70671FD5C7F6B2CFD5B3C81B /* CodeScanner in Frameworks */,
 				61A313900669DC487EA6863D /* SharedUI in Frameworks */,
-				C1135F54B24A6B86BDC6F769 /* WRCore in Frameworks */,
 				7D707FDB5B95C572C974EC5E /* Sentry-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -123,7 +118,6 @@
 			isa = PBXGroup;
 			children = (
 				36AB5A225A4846F5C481DF79 /* SharedUI */,
-				CA5239AA380E7A56C54E19AC /* WRCore */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -155,6 +149,7 @@
 			buildConfigurationList = 60349513182458A51949DF23 /* Build configuration list for PBXNativeTarget "WaiterRobotLava" */;
 			buildPhases = (
 				3373788ECCEFE183F0C29B83 /* Set BuildNumber to epochMinute */,
+				82416FF42D64F90000B4FCCE /* Build shared Kotlin framework */,
 				ADBAC7ADCDC436C4DA348DF2 /* Sources */,
 				40C1E9D09B43297FF0E234CC /* Resources */,
 				EE8E9FC485BFB11435986301 /* Frameworks */,
@@ -172,7 +167,6 @@
 				C109840ED6C429035266718E /* UIPilot */,
 				9DEDC56556C4308CCDECB2F9 /* CodeScanner */,
 				55C201C10992ADF9DCF1AB1D /* SharedUI */,
-				B7E489280D66E5F0DD389817 /* WRCore */,
 				43EED5F7BB605AA2D75C1887 /* Sentry-Dynamic */,
 			);
 			productName = WaiterRobotLava;
@@ -183,6 +177,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84B53686DDD2A6289194F3F2 /* Build configuration list for PBXNativeTarget "WaiterRobot" */;
 			buildPhases = (
+				82416FF32D64F90000B4FCCE /* Build shared Kotlin framework */,
 				CC0150DC6397C15A620ADF26 /* Sources */,
 				35A540AA506C44AA0778E09E /* Resources */,
 				849BE04D5C6F481ED261FC99 /* Frameworks */,
@@ -200,7 +195,6 @@
 				31066418D1485DF4475A6079 /* UIPilot */,
 				37CBF231C369CD35ECC4385E /* CodeScanner */,
 				BABDBDDD081BD349A058BE89 /* SharedUI */,
-				169FFF39D770347AD66BA7D7 /* WRCore */,
 				9603F5DF319E397835ED07CF /* Sentry-Dynamic */,
 			);
 			productName = WaiterRobot;
@@ -235,7 +229,6 @@
 				41C3BBF4176E4ED04740B917 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 				C238B2EE28985222F9A6AB7A /* XCRemoteSwiftPackageReference "UIPilot" */,
 				ED2DCE1705F5455A52D62F47 /* XCLocalSwiftPackageReference "Modules/SharedUI" */,
-				F7A9B4B06DB5FDEC25E63741 /* XCLocalSwiftPackageReference "Modules/WRCore" */,
 			);
 			projectDirPath = "";
 			projectRoot = "";
@@ -321,6 +314,44 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# The Kotlin `shared` framework is static, and a static framework can't carry\n# its own resources, so the moko-resources bundle never reaches the app on its\n# own. Without this, MR.strings throws on first access at runtime.\n# See https://github.com/icerockdev/moko-resources#iosmacos-static-kotlin-frameworks-support\n\"$SRCROOT/../gradlew\" -p \"$SRCROOT/../\" :shared:copyFrameworkResourcesToApp \\\n    -Pmoko.resources.PLATFORM_NAME=\"$PLATFORM_NAME\" \\\n    -Pmoko.resources.CONFIGURATION=\"${KOTLIN_FRAMEWORK_BUILD_TYPE:-$CONFIGURATION}\" \\\n    -Pmoko.resources.ARCHS=\"$ARCHS\" \\\n    -Pmoko.resources.BUILT_PRODUCTS_DIR=\"$BUILT_PRODUCTS_DIR\" \\\n    -Pmoko.resources.CONTENTS_FOLDER_PATH=\"$CONTENTS_FOLDER_PATH\"\n";
+		};
+		82416FF32D64F90000B4FCCE /* Build shared Kotlin framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build shared Kotlin framework";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Direct integration of the Kotlin `shared` framework.\n# https://kotlinlang.org/docs/multiplatform/multiplatform-direct-integration.html\nif [ \"YES\" = \"$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED\" ]; then\n  echo \"Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \\\"YES\\\"\"\n  exit 0\nfi\ncd \"$SRCROOT/..\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
+		};
+		82416FF42D64F90000B4FCCE /* Build shared Kotlin framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build shared Kotlin framework";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Direct integration of the Kotlin `shared` framework.\n# https://kotlinlang.org/docs/multiplatform/multiplatform-direct-integration.html\nif [ \"YES\" = \"$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED\" ]; then\n  echo \"Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \\\"YES\\\"\"\n  exit 0\nfi\ncd \"$SRCROOT/..\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -664,10 +695,6 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Modules/SharedUI;
 		};
-		F7A9B4B06DB5FDEC25E63741 /* XCLocalSwiftPackageReference "Modules/WRCore" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = Modules/WRCore;
-		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -698,10 +725,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		169FFF39D770347AD66BA7D7 /* WRCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = WRCore;
-		};
 		31066418D1485DF4475A6079 /* UIPilot */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C238B2EE28985222F9A6AB7A /* XCRemoteSwiftPackageReference "UIPilot" */;
@@ -730,10 +753,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 035550925EEDC82A97EDAA4E /* XCRemoteSwiftPackageReference "CodeScanner" */;
 			productName = CodeScanner;
-		};
-		B7E489280D66E5F0DD389817 /* WRCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = WRCore;
 		};
 		BABDBDDD081BD349A058BE89 /* SharedUI */ = {
 			isa = XCSwiftPackageProductDependency;

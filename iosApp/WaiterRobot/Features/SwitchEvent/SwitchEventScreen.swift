@@ -1,7 +1,6 @@
 import shared
 import SwiftUI
 import UIPilot
-import WRCore
 
 struct SwitchEventScreen: View {
     @EnvironmentObject var navigator: UIPilot<Screen>

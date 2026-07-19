@@ -1,6 +1,5 @@
 import shared
 import SwiftUI
-import WRCore
 
 struct ProductGroupList: View {
     let products: [Product]

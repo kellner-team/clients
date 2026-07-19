@@ -2,7 +2,6 @@ import Foundation
 import shared
 import SwiftUI
 import UIPilot
-import WRCore
 
 struct BillingScreen: View {
     @EnvironmentObject var navigator: UIPilot<Screen>
