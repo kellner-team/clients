@@ -118,6 +118,23 @@ buildkonfig {
     }
 }
 
+sentryKmp {
+    // The Sentry Cocoa framework is provided via SPM. The plugin's auto-detection
+    // only scans ~/Library/Developer/Xcode/DerivedData, which misses Xcode Cloud
+    // (DerivedData lives at /Volumes/workspace/DerivedData there).
+    // When invoked from an Xcode build phase, BUILD_DIR points inside DerivedData
+    // (<DerivedData>/Build/Products), so resolve the SPM artifact from it directly.
+    // The static Sentry.xcframework is required because the `shared` framework is
+    // static (the plugin rejects a dynamic Sentry for a static Kotlin framework).
+    System.getenv("BUILD_DIR")?.substringBefore("/Build/")?.let { derivedData ->
+        linker {
+            frameworkPath.set(
+                "$derivedData/SourcePackages/artifacts/sentry-cocoa/Sentry/Sentry.xcframework"
+            )
+        }
+    }
+}
+
 skie {
     analytics {
         disableUpload.set(true)
