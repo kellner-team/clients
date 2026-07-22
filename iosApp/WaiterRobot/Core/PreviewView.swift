@@ -23,6 +23,11 @@ public struct PreviewView<Content: View>: View {
 
     public var body: some View {
         ZStack {
+            // UIPilotHost is only needed when actually running a preview. Referencing it
+            // in Release causes a linker error: the optimizer specializes UIPilotHost's
+            // body into this module and references UIPilot's internal ViewGenerator
+            // metadata, which the library does not export.
+            #if DEBUG
             if withUIPilot {
                 UIPilotHost(navigator) { _ in
                     content
@@ -30,6 +35,9 @@ public struct PreviewView<Content: View>: View {
             } else {
                 content
             }
+            #else
+            content
+            #endif
         }
     }
 }
