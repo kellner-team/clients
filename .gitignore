@@ -21,3 +21,4 @@ node_modules/
 **/.keys
 **/google-services.json
 androidApp/.keys.tar.gz.asc
+androidApp/.keys.tar.gz
