@@ -16,6 +16,7 @@ plugins {
     alias(libs.plugins.sentry) apply false
     alias(libs.plugins.kotlin.detekt) apply true
     alias(libs.plugins.moko.resources) apply false
+    alias(libs.plugins.realm) apply false
     alias(libs.plugins.axionRelease)
 }
 

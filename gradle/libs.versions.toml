@@ -1,5 +1,5 @@
 [versions]
-agp = "8.12.0"
+agp = "8.12.3"
 android-compileSdk = "36"
 android-minSdk = "26"
 android-targetSdk = "36"
@@ -13,26 +13,26 @@ axionRelease = "1.21.2"
 composeHotReload = "1.0.0-rc03"
 composeMultiplatform = "1.9.3"
 junit = "4.13.2"
-kotlin = "2.0.20" # realm does not support kotlin > 2.0.20 yet
+kotlin = "2.2.10"
 kotlinx-coroutines = "1.10.2"
-sentry = "0.15.0" # 0.16.0+ is built with Kotlin 2.1.x (klib ABI 1.201.0) which is incompatible with our Kotlin 2.0.20 (pinned by Realm)
+sentry = "0.27.0"
 
 
-ksp = "2.0.20-1.0.25" # First part must match the kotlin version
+ksp = "2.2.10-2.0.2" # First part must match the kotlin version
 kermit = "2.0.3"
 koin = "3.5.6"
 orbitMvi = "8.0.0"
 ktor = "3.0.3"
 moko-mvvm = "0.16.1"
 moko-permissions = "0.18.0"
-moko-resources = "0.24.5"
+moko-resources = "0.26.4"
 settings = "1.1.1"
-realm = "3.0.0" # migrate to some other db as this is only minimal (community) support anymore (blocking kotlin updates)
+realm = "3.2.9" # migrate to room as realm is only minimal (community) support anymore and requires usage of a fork (blocking kotlin updates)
 detekt = "1.23.6"
 kotlinx-serialization-json = "1.7.3"
 kotlinx-datetime = "0.6.1"
 buildkonfig = "0.15.1"
-skie = "0.10.1"
+skie = "0.10.13"
 
 # Android
 android-camera = "1.4.2"
@@ -106,7 +106,7 @@ ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor" }
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 ktor-client-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 
-realm = { module = "io.realm.kotlin:library-base", version.ref = "realm" }
+realm = { module = "com.infomaniak.realm.kotlin:library-base", version.ref = "realm" }
 settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "settings" }
 settings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "settings" }
 
@@ -133,5 +133,5 @@ play-publisher = { id = "com.github.triplet.play", version.ref = "play-publisher
 google-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
 touchlab-skie = { id = "co.touchlab.skie", version.ref = "skie" }
-realm = { id = "io.realm.kotlin", version.ref = "realm" }
+realm = { id = "com.infomaniak.realm.kotlin", version.ref = "realm" }
 moko-resources = { id = "dev.icerock.mobile.multiplatform-resources", version.ref = "moko-resources" }
